@@ -4,19 +4,19 @@ endif()
 
 add_executable(ordermatch Application.cpp Market.cpp ordermatch.cpp ${applink_SOURCE})
 
-target_include_directories(ordermatch PRIVATE ${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/include/quickfix ${CMAKE_SOURCE_DIR})
+target_include_directories(ordermatch PRIVATE ${QUICKFIX_CMAKE_SOURCE_DIR}/include ${QUICKFIX_CMAKE_SOURCE_DIR}/include/quickfix ${QUICKFIX_CMAKE_SOURCE_DIR})
 
 
 target_link_libraries(ordermatch ${PROJECT_NAME})
 
 if (NOT WIN32)
 ADD_CUSTOM_TARGET(ordermatch_target ALL
-                  COMMAND ${CMAKE_COMMAND} -E create_symlink $<TARGET_FILE:ordermatch> ${CMAKE_SOURCE_DIR}/bin/ordermatch)
+                  COMMAND ${CMAKE_COMMAND} -E create_symlink $<TARGET_FILE:ordermatch> ${QUICKFIX_CMAKE_SOURCE_DIR}/bin/ordermatch)
 else()
 set_target_properties(ordermatch PROPERTIES
-                      RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/bin/debug/ordermatch/
-                      RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/bin/release/ordermatch/
-                      RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_SOURCE_DIR}/bin/release/ordermatch/)
+                      RUNTIME_OUTPUT_DIRECTORY_DEBUG ${QUICKFIX_CMAKE_SOURCE_DIR}/bin/debug/ordermatch/
+                      RUNTIME_OUTPUT_DIRECTORY_RELEASE ${QUICKFIX_CMAKE_SOURCE_DIR}/bin/release/ordermatch/
+                      RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${QUICKFIX_CMAKE_SOURCE_DIR}/bin/release/ordermatch/)
 endif()                   
 
 if( WIN32 OR ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
